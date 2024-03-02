@@ -44,6 +44,7 @@ override_dh_dkms:
 <property name="mdpc.file.install">
 src/common /usr/src/ravenna-alsa-lkm-001
 src/driver /usr/src/ravenna-alsa-lkm-001
+merging-ravenna-alsa.conf /etc/modules-load.d
 </property>
 
 <target name="download">
