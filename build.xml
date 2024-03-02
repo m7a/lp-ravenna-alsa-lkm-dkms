@@ -42,9 +42,8 @@ override_dh_dkms:
 </property>
 
 <property name="mdpc.file.install">
-src/driver/*.c /usr/src/ravenna-alsa-lkm-001
-src/driver/*.h /usr/src/ravenna-alsa-lkm-001
-src/driver/Makefile /usr/src/ravenna-alsa-lkm-001
+src/common /usr/src/ravenna-alsa-lkm-001
+src/driver /usr/src/ravenna-alsa-lkm-001
 </property>
 
 <target name="download">
