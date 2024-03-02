@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="build">
+
+<!-- APPLICATION METADATA -->
+<property name="masysma.target"  value="."/>
+<property name="mdpc.name"       value="mdvl-ravenna-alsa-lkm-dkms"/>
+<property name="mdpc.section"    value="kernel"/>
+<property name="mdpc.arch"       value="amd64"/>
+<property name="mdpc.descrs"     value="RAVENNA/AES67 driver to use with free daemon - kernel module"/>
+<property name="mdpc.bdep"       value="dh-dkms, debhelper, config-package-dev"/>
+<property name="mdpc.depends"    value="dkms, linux-headers-amd64"/>
+<property name="mdpc.recommends" value="linux-libc-dev"/>
+<property name="mdpc.descrl">
+ This installs the RAVENNA/AES67 driver by Merging Technologies with the
+ patches necessary to run alongside the free userspace daemon by building a
+ module with DKMS.
+</property>
+<property name="mdpc.copyright" value="Copyright(C) 2017 Merging Technologies"/>
+<!-- as stated in module_netlink.h -->
+<property name="mdpc.lblock">
+License: GPL-2+
+ RAVENNA/AES67 ALSA LKM is free software; you can redistribute it and / or
+ modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 2
+ of the License, or (at your option) any later version.
+ .
+ RAVENNA/AES67 ALSA LKM is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with RAVAENNA ALSA LKM ; if not, see &lt;http://www.gnu.org/licenses/&gt;.
+</property>
+<!-- https://vincent.bernat.ch/en/blog/2018-packaging-driver-debian-dkms -->
+<property name="mdpc.add.dh">--with=dkms</property>
+<property name="mdpc.add.rules">
+include /usr/share/dpkg/pkg-info.mk
+
+override_dh_dkms:
+	dh_dkms -V 001 -- src/driver/dkms.conf
+</property>
+
+<property name="mdpc.file.install">
+src/driver/*.c /usr/src/ravenna-alsa-lkm-001
+src/driver/*.h /usr/src/ravenna-alsa-lkm-001
+src/driver/Makefile /usr/src/ravenna-alsa-lkm-001
+</property>
+
+<target name="download">
+	<masysma_require_artifact masysmaartifact="ravenna-alsa-lkm.git"
+		masysmaatarget="src" masysmaabranch="aes67-daemon"
+		masysmaadef="https://github.com/bondagit/ravenna-alsa-lkm.git"/>
+</target>
+
+<target name="build" depends="download">
+	<copy file="dkms.conf" tofile="src/driver/dkms.conf"/>
+</target>
+
+<target name="clean">
+	<delete dir="src" failonerror="false"/>
+</target>
+
+<!-- CI INTEGRATION -->
+<target name="autoci" depends="autopackage"/>
+
+<!-- CONSTANT TPL IMPORT -->
+<property environment="env"/>
+<condition property="masysma.internal.includepath.rel" value="${env.MDVL_CI_PHOENIX_ROOT}" else=".."><isset property="env.MDVL_CI_PHOENIX_ROOT"/></condition>
+<property name="masysma.internal.includepath" location="${masysma.internal.includepath.rel}"/>
+<property name="masysma.internal.loadpath" value="${masysma.internal.includepath}/co-build/ant-build-template.xml"/>
+<condition property="masysma.internal.load" value="file://${masysma.internal.loadpath}" else="https://raw.githubusercontent.com/m7a/co-build/master/ant-build-template.xml"><resourceexists><file file="${masysma.internal.loadpath}"/></resourceexists></condition>
+<import><url url="${masysma.internal.load}"/></import>
+
+</project>

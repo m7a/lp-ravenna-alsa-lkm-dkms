@@ -1,0 +1,11 @@
+mdvl-ravenna-alsa-lkm-dkms (1.0.1) stable; urgency=medium
+
+  * Fix dkms.conf and version confusion.
+
+ -- Ma_Sys.ma Linux-Fan <info@masysma.net>  Sat, 02 Mar 2024 18:54:40 +0100
+
+mdvl-ravenna-alsa-lkm-dkms (1.0.0) stable; urgency=medium
+
+  * Package created with MDPC 2
+
+ -- Ma_Sys.ma Linux-Fan <info@masysma.net>  Sat, 02 Mar 2024 18:44:36 +0100
