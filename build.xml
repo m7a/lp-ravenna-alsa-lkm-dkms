@@ -7,7 +7,7 @@
 <property name="mdpc.section"    value="kernel"/>
 <property name="mdpc.arch"       value="amd64"/>
 <property name="mdpc.descrs"     value="RAVENNA/AES67 driver to use with free daemon - kernel module"/>
-<property name="mdpc.bdep"       value="dh-dkms, debhelper, config-package-dev"/>
+<property name="mdpc.bdep"       value="dh-dkms, debhelper-compat (= 13), config-package-dev"/>
 <property name="mdpc.depends"    value="dkms, linux-headers-amd64"/>
 <property name="mdpc.recommends" value="linux-libc-dev"/>
 <property name="mdpc.descrl">
