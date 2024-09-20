@@ -38,23 +38,24 @@ License: GPL-2+
 include /usr/share/dpkg/pkg-info.mk
 
 override_dh_dkms:
-	dh_dkms -V 001 -- src/driver/dkms.conf
+	dh_dkms -V 001 -- src/3rdparty/ravenna-alsa-lkm/driver/dkms.conf
 </property>
 
 <property name="mdpc.file.install">
-src/common /usr/src/ravenna-alsa-lkm-001
-src/driver /usr/src/ravenna-alsa-lkm-001
+src/3rdparty/ravenna-alsa-lkm/common /usr/src/ravenna-alsa-lkm-001
+src/3rdparty/ravenna-alsa-lkm/driver /usr/src/ravenna-alsa-lkm-001
 merging-ravenna-alsa.conf /etc/modules-load.d
 </property>
 
 <target name="download">
-	<masysma_require_artifact masysmaartifact="ravenna-alsa-lkm.git"
-		masysmaatarget="src" masysmaabranch="aes67-daemon"
-		masysmaadef="https://github.com/bondagit/ravenna-alsa-lkm.git"/>
+	<masysma_require_artifact masysmaartifact="aes67-linux-daemon.git"
+		masysmaatarget="src"
+		masysmaadef="https://github.com/bondagit/aes67-linux-daemon.git"/>
 </target>
 
 <target name="build" depends="download">
-	<copy file="dkms.conf" tofile="src/driver/dkms.conf"/>
+	<copy file="dkms.conf"
+		tofile="src/3rdparty/ravenna-alsa-lkm/driver/dkms.conf"/>
 </target>
 
 <target name="clean">

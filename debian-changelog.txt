@@ -1,3 +1,9 @@
+mdvl-ravenna-alsa-lkm-dkms (1.0.7) stable; urgency=medium
+
+  * Update to newest revision of kernel module. Align with aes67-linux-daemon.
+
+ -- Ma_Sys.ma Linux-Fan <info@masysma.net>  Fri, 20 Sep 2024 18:39:12 +0200
+
 mdvl-ravenna-alsa-lkm-dkms (1.0.6) stable; urgency=medium
 
   * Attempt to update to v1.10
